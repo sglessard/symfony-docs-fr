@@ -148,7 +148,7 @@ Gestion de données de session
 La gestion de session de PHP requiert l'utilisation de la variable super-globale
 ``$_SESSION``, cependant, cela interfère d'une certaine manière avec la
 testabilité du code et l'encapsulation dans un paradigme POO. Pour aider
-à résoudre ce soucis, Symfony2 utilise des « bags de session » (« sacs
+à résoudre ce souci, Symfony2 utilise des « bags de session » (« sacs
 de session » en français) liés à la session pour encapsuler un ensemble
 de données spécifique d'« attributs » ou de « messages flash ».
 
