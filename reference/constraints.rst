@@ -14,16 +14,21 @@ Contraintes de validation de référence
    constraints/Type
 
    constraints/Email
-   constraints/MinLength
-   constraints/MaxLength
    constraints/Length
    constraints/Url
    constraints/Regex
    constraints/Ip
 
-   constraints/Max
-   constraints/Min
    constraints/Range
+
+   constraints/EqualTo
+   constraints/NotEqualTo
+   constraints/IdenticalTo
+   constraints/NotIdenticalTo
+   constraints/LessThan
+   constraints/LessThanOrEqual
+   constraints/GreaterThan
+   constraints/GreaterThanOrEqual
 
    constraints/Date
    constraints/DateTime
@@ -40,7 +45,12 @@ Contraintes de validation de référence
    constraints/File
    constraints/Image
 
+   constraints/CardScheme
+   constraints/Currency
    constraints/Luhn
+   constraints/Iban
+   constraints/Isbn
+   constraints/Issn
 
    constraints/Callback
    constraints/All

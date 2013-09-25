@@ -9,17 +9,17 @@ Types de formulaire de référence
    :hidden:
 
    types/birthday
+   types/button
    types/checkbox
    types/choice
    types/collection
    types/country
-   types/csrf
+   types/currency
    types/date
    types/datetime
    types/email
    types/entity
    types/file
-   types/field
    types/form
    types/hidden
    types/integer
@@ -31,7 +31,9 @@ Types de formulaire de référence
    types/percent
    types/radio
    types/repeated
+   types/reset
    types/search
+   types/submit
    types/text
    types/textarea
    types/time

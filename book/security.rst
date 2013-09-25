@@ -127,7 +127,7 @@ login/mot de passe) :
     La distribution Symfony Standard place la configuration de la sécurité dans un fichier 
     séparé (``app/config/security.yml``). Si vous ne voulez pas utiliser un fichier séparé,
     vous pouvez mettre la configuration directement dans le fichier principal de configuration
-    (``app/config/security.yml``).
+    (``app/config/config.yml``).
 
 Le résultat final de cette configuration est un système de sécurité entièrement fonctionnel, 
 que l'on peut décrire de la manière suivante :
@@ -174,6 +174,8 @@ n'est nécessaire pour accéder l'URL ``/foo``(dans la section ``access_control`
 
 Si vous supprimez la clé ``anonymous``, le pare-feu va *toujours* demander à l'utilisateur 
 de s'authentifier immédiatement.
+
+.. _book-security-firewalls:
 
 Contrôle d'accès (autorisation)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -259,7 +261,7 @@ Utilisation d'un formulaire de connexion traditionnel
 
 .. tip::
 
-    Dans cette section, vous apprendre comment créer un formulaire de connexion basique
+    Dans cette section, vous allez apprendre comment créer un formulaire de connexion basique
     qui continue d'utiliser les utilisateurs codés en dur que vous avez défini dans le
     fichier ``security.yml``.
 
@@ -1254,7 +1256,8 @@ la base de données? C'est possible en créant un fournisseur qui lie les 2 four
         security:
             providers:
                 chain_provider:
-                    providers: [in_memory, user_db]
+                    chain : 
+                        providers: [in_memory, user_db]
                 in_memory:
                     memory:
                         users:
@@ -1570,6 +1573,8 @@ Une fois qu'un utilisateur s'est déconnecté, il sera redirigé à l'URL défin
 déconnexion, veuillez lire
 :doc:`Security Configuration Reference</reference/configuration/security>`.
 
+.. _book-security-template:
+
 Contrôle d'accès dans les templates
 -----------------------------------
 
@@ -1594,7 +1599,7 @@ la fonction helper intégrée :
 
     Si vous utilisez cette fonction et que vous ne vous trouvez pas à une URL pour laquelle
     un pare-feu est actif, une exception sera lancée. Encore une fois, c'est toujours une
-    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (comme c'e'st montré dans ce chapitre).
+    bonne idée d'avoir un pare-feu qui couvre toutes les URLs (comme c'est montré dans ce chapitre).
 
 Contrôle d'accès dans les Contrôleurs
 -------------------------------------

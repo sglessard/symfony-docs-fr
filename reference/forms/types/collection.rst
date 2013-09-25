@@ -23,12 +23,22 @@ est très utile lorsque vous créerez des formulaires avec des relations one-to-
 +-------------+-----------------------------------------------------------------------------+
 | Options     | - `label`_                                                                  |
 | héritées    | - `error_bubbling`_                                                         |
+|             | - `error_mapping`_                                                          |
 |             | - `by_reference`_                                                           |
+|             | - `empty_data`_                                                             |
+|             | - `mapped`_                                                                 |
 +-------------+-----------------------------------------------------------------------------+
 | Type Parent | :doc:`form</reference/forms/types/form>`                                    |
 +-------------+-----------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CollectionType`    |
 +-------------+-----------------------------------------------------------------------------+
+
+.. note::
+
+    Si vous utilisez une collection d'entités Doctrine, Il faut porter une attention
+    particulière aux options  `allow_add`_, `allow_delete`_ et `by_reference`_.
+    Dans vous pouvez voir un exemple complet dans le cookbook.
+    :doc:`/cookbook/form/form_collections`.
 
 Utilisation basique
 -------------------
@@ -53,19 +63,19 @@ La façon la plus simple de rendre ces champs est de tout faire en un coup :
 .. configuration-block::
 
     .. code-block:: jinja
-    
+
         {{ form_row(form.emails) }}
 
     .. code-block:: php
     
-        <?php echo $view['form']->row($form['emails]) ?>
+        <?php echo $view['form']->row($form['emails']) ?>
 
 Une méthode plus flexible pourrait ressembler à ceci :
 
 .. configuration-block::
 
     .. code-block:: html+jinja
-    
+
         {{ form_label(form.emails) }}
         {{ form_errors(form.emails) }}
 
@@ -82,7 +92,7 @@ Une méthode plus flexible pourrait ressembler à ceci :
 
         <?php echo $view['form']->label($form['emails']) ?>
         <?php echo $view['form']->errors($form['emails']) ?>
-        
+
         <ul>
         {% for emailField in form.emails %}
         <?php foreach ($form['emails'] as $emailField): ?>
@@ -142,7 +152,7 @@ besoin que du JavaScript :
 .. configuration-block::
 
     .. code-block:: html+jinja
-    
+
         <form action="..." method="POST" {{ form_enctype(form) }}>
             {# ... #}
 
@@ -155,9 +165,9 @@ besoin que du JavaScript :
                 </li>
             {% endfor %}
             </ul>
-        
+
             <a href="#" id="add-another-email">Add another email</a>
-        
+
             {# ... #}
         </form>
 
@@ -192,7 +202,7 @@ besoin que du JavaScript :
     est automatiquement disponible dans l'attribut ``data-prototype`` de l'élément
     (ex: ``div`` ou ``table``) qui encadre votre collection. La seule différence
     c'est que le « form row » est rendu pour vous en entier, ce qui signifie que vous
-    n'aurez pas à l'encadrer dans un conteneur quelconque comme nous l'avions fait
+    n'aurez pas à l'encadrer dans un conteneur quelconque comme cela a été fait
     ci-dessus.
 
 Options du champ
@@ -295,11 +305,11 @@ Le champ prototype peut être rendu via la variable ``prototype`` du champ colle
 .. configuration-block::
 
     .. code-block:: jinja
-    
+
         {{ form_row(form.emails.vars.prototype) }}
 
     .. code-block:: php
-    
+
         <?php echo $view['form']->row($form['emails']->getVar('prototype')) ?>
 
 Notez que tout ce dont vous avez vraiment besoin c'est le « widget », mais selon la
@@ -318,10 +328,6 @@ ou :ref:`cookbook-form-collections-new-prototype`.
 prototype_name 
 ~~~~~~~~~~~~~~
 
-.. versionadded:: 2.1
-   
-    L'option ``prototype_name`` est un ajout de Symfony 2.1
-
 **type**: ``String`` **default**: ``__name__``
 
 Si vous avez plusieurs collections dans votre formulaire, ou pire encore,
@@ -337,6 +343,10 @@ Toutes les options ne sont pas listées ici, seulement celles qui s'appliquent l
 
 .. include:: /reference/forms/types/options/label.rst.inc
 
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
 error_bubbling
 ~~~~~~~~~~~~~~
 
@@ -347,3 +357,6 @@ error_bubbling
 .. _reference-form-types-by-reference:
 
 .. include:: /reference/forms/types/options/by_reference.rst.inc
+
+.. include:: /reference/forms/types/options/empty_data.rst.inc
+

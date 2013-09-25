@@ -258,9 +258,10 @@ document XML/HTML :
             $changeHistory = true
         )
 
-    Le tableau ``server`` contient les valeurs brutes que vous trouveriez normalement
-    dans la variable superglobale `$_SERVER`_. Par exemple, pour définir les entêtes
-    HTTP `Content-Type` et `Referer`, vous procéderiez comme suit :
+Le tableau ``server`` contient les valeurs brutes que vous trouveriez normalement
+dans la variable superglobale `$_SERVER`_. Par exemple, pour définir les entêtes
+HTTP `Content-Type` et `Referer`, vous procéderiez comme suit (pensez au préfixe
+`HTTP_` pour les en-têtes non standard) :
 
     .. code-block:: php
 
@@ -272,6 +273,7 @@ document XML/HTML :
             array(
                 'CONTENT_TYPE' => 'application/json',
                 'HTTP_REFERER' => '/foo/bar',
+		'HTTP_X-Requested-With' => 'XMLHttpRequest',
             )
         );
 
@@ -302,7 +304,7 @@ document XML/HTML :
         // Vérifie que le status de la réponse est 404
         $this->assertTrue($client->getResponse()->isNotFound());
         // Vérifie un status spécifique
-        $this->assertEquals(200, $client->getResponse()->getStatus());
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
 
         // Vérifie que la réponse est redirigée vers /demo/contact
         $this->assertTrue($client->getResponse()->isRedirect('/demo/contact'));

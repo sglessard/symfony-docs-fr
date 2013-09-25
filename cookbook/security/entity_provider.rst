@@ -59,7 +59,7 @@ qui proviennent de l'interface
      * @ORM\Table(name="acme_users")
      * @ORM\Entity(repositoryClass="Acme\UserBundle\Entity\UserRepository")
      */
-    class User implements UserInterface
+    class User implements UserInterface, \Serializable
     {
         /**
          * @ORM\Column(type="integer")
@@ -137,6 +137,26 @@ qui proviennent de l'interface
         public function eraseCredentials()
         {
         }
+
+       /**
+         * @see \Serializable::serialize()
+         */
+        public function serialize()
+        {
+            return serialize(array(
+                $this->id,
+            ));
+        }
+
+        /**
+         * @see \Serializable::unserialize()
+         */
+        public function unserialize($serialized)
+        {
+            list (
+                $this->id,
+            ) = unserialize($serialized);
+        }
     }
 
 Afin d'utiliser une instance de la classe ``AcmeUserBundle:User`` dans la couche
@@ -152,12 +172,14 @@ force la classe à implémenter les cinq méthodes suivantes :
 Pour plus de détails sur chacune d'entre elles, voir
 :class:`Symfony\\Component\\Security\\Core\\User\\UserInterface`.
 
-.. versionadded:: 2.1
-    Dans Symfony2.1, la méthode ``equals`` a été supprimée de ``UserInterface``.
-    Si vous avez besoin de surcharger l'implémentation par défaut de la logique
-    de comparaison, implémentez la nouvelle interface
-    :class:`Symfony\\Component\\Security\\Core\\User\\EquatableInterface` et
-    implémentez la méthode ``isEqualTo``;
+.. note::
+
+    L'interface :phpclass:`Serializable` ainsi que ses méthodes ``serialize`` et ``unserialize``
+    ont été ajoutées pour permettre à la classe ``User`` d'être sérialisable
+    dans la session. Cela peut ou non être nécessaire en fonction de votre configuration,
+    mais c'est certainement une bonne idée. Seule la propriété ``id`` a besoin d'être
+    sérialisée, car la méthode :method:`Symfony\\Bridge\\Doctrine\\Security\\User\\EntityUserProvider::refreshUser`
+    recharge l'utilisateur à chaque requête en utilisant la propriété ``id``.
 
 .. code-block:: php
 
@@ -286,13 +308,13 @@ que la méthode ``isEnabled()`` va retourner la valeur booléenne du champ
 .. code-block:: php
 
     // src/Acme/UserBundle/Entity/User.php
-    namespace Acme\Bundle\UserBundle\Entity;
+    namespace Acme\UserBundle\Entity;
 
     // ...
     use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
     
-    class User implements AdvancedUserInterface
+    class User implements AdvancedUserInterface, \Serializable
     {
         // ...
 
@@ -373,7 +395,7 @@ la classe ``UserRepository``::
                 // s'il n'y a pas d'entrée correspondante aux critères
                 $user = $q->getSingleResult();
             } catch (NoResultException $e) {
-                throw new UsernameNotFoundException(sprintf('Unable to find an active admin AcmeUserBundle:User object identified by "%s".', $username), null, 0, $e);
+                throw new UsernameNotFoundException(sprintf('Unable to find an active admin AcmeUserBundle:User object identified by "%s".', $username), 0, $e);
             }
 
             return $user;
@@ -383,10 +405,15 @@ la classe ``UserRepository``::
         {
             $class = get_class($user);
             if (!$this->supportsClass($class)) {
-                throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', $class));
+                throw new UnsupportedUserException(
+                    sprintf(
+                        'Instances of "%s" are not supported.',
+                        $class
+                    )
+                );
             }
 
-            return $this->loadUserByUsername($user->getUsername());
+            return $this->find($user->getId());
         }
 
         public function supportsClass($class)
@@ -444,7 +471,7 @@ utilisateurs. Comme un groupe est aussi un rôle, la méthode précédente ``get
 retourne maintenant la liste des groupes reliés::
 
     // src/Acme/UserBundle/Entity/User.php
-    namespace Acme\Bundle\UserBundle\Entity;
+    namespace Acme\UserBundle\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
 
@@ -479,7 +506,7 @@ implémente l'interface :class:`Symfony\\Component\\Security\\Core\\Role\\RoleIn
 qui la force à avoir une méthode ``getRole()``::
 
     // src/Acme/Bundle/UserBundle/Entity/Group.php
-    namespace Acme\Bundle\UserBundle\Entity;
+    namespace Acme\UserBundle\Entity;
 
     use Symfony\Component\Security\Core\Role\RoleInterface;
     use Doctrine\Common\Collections\ArrayCollection;
@@ -536,7 +563,7 @@ la méthode ``UserRepository::loadUserByUsername()``. Cela va récupérer l'util
 ainsi que ses rôles/groupes associés avec une requête unique::
 
     // src/Acme/UserBundle/Entity/UserRepository.php
-    namespace Acme\Bundle\UserBundle\Entity;
+    namespace Acme\UserBundle\Entity;
 
     // ...
 

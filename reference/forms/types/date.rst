@@ -27,12 +27,20 @@ jour et année) ou comme trois listes déroulantes (voyez l'option `widget_`).
 |                      | - `months`_                                                                 |
 |                      | - `days`_                                                                   |
 |                      | - `format`_                                                                 |
-|                      | - `pattern`_                                                                |
-|                      | - `data_timezone`_                                                          |
-|                      | - `user_timezone`_                                                          |
+|                      | - `model_timezone`_                                                         |
+|                      | - `view_timezone`_                                                          |
++----------------------+-----------------------------------------------------------------------------+
+| Options surchargées  | - `by_reference`_                                                           |
+|                      | - `error_bubbling`_                                                         |
 +----------------------+-----------------------------------------------------------------------------+
 | Options              | - `invalid_message`_                                                        |
 | héritées             | - `invalid_message_parameters`_                                             |
+|                      | - `read_only`_                                                              |
+|                      | - `disabled`_                                                               |
+|                      | - `mapped`_                                                                 |
+|                      | - `inherit_data`_                                                           |
+|                      | - `virtual`_                                                                |
+|                      | - `error_mapping`_                                                          |
 +----------------------+-----------------------------------------------------------------------------+
 | Type parent          | ``field`` (si texte), ``form`` sinon                                        |
 +----------------------+-----------------------------------------------------------------------------+
@@ -109,17 +117,42 @@ la valeur « vide»::
 
 .. include:: /reference/forms/types/options/date_format.rst.inc
 
-.. include:: /reference/forms/types/options/date_pattern.rst.inc
+.. include:: /reference/forms/types/options/model_timezone.rst.inc
 
-.. include:: /reference/forms/types/options/data_timezone.rst.inc
+.. include:: /reference/forms/types/options/view_timezone.rst.inc
 
-.. include:: /reference/forms/types/options/user_timezone.rst.inc
+Options surchargées
+-------------------
+
+by_reference
+~~~~~~~~~~~~
+
+**default**: ``false``
+
+La classe ``DateTime`` est considéré comme des objets immuables.
+
+error_bubbling
+~~~~~~~~~~~~~~
+
+**default**: ``false``
 
 Options héritées
 ----------------
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/invalid_message.rst.inc
 
 .. include:: /reference/forms/types/options/invalid_message_parameters.rst.inc
+
+.. include:: /reference/forms/types/options/read_only.rst.inc
+
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
+
+.. include:: /reference/forms/types/options/inherit_data.rst.inc
+
+.. include:: /reference/forms/types/options/virtual.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc

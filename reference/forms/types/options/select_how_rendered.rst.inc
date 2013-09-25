@@ -1,5 +1,5 @@
-Liste déroulante, checkboxes ou boutons radio
----------------------------------------------
+Liste déroulante, cases à cocher ou boutons radio
+-------------------------------------------------
 
 Ce champ peut être affichée comme un ou plusieurs différents champs HTML,
 selon la valeur des options ``expanded`` et ``multiple`` :
@@ -13,5 +13,5 @@ selon la valeur des options ``expanded`` et ``multiple`` :
 +-----------------------------------------------+----------+----------+
 | Boutons radio                                 | true     | false    |
 +-----------------------------------------------+----------+----------+
-| Checkboxes                                    | true     | true     |
+| Cases à cocher                                | true     | true     |
 +-----------------------------------------------+----------+----------+ 

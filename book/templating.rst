@@ -645,7 +645,7 @@ utilisant la chaîne de caractères standard pour les contrôleurs
         ...
 
         <div id="sidebar">
-            {% render "AcmeArticleBundle:Article:recentArticles" with {'max': 3} %}
+            {{ render(controller('AcmeArticleBundle:Article:recentArticles', { 'max': 3 })) }}
         </div>
 
     .. code-block:: php
@@ -720,6 +720,8 @@ Le contenu par défaut (pendant le chargement ou si javascript n'est pas activé
 
 .. index::
    single: Templating; Linking to pages
+
+.. _book-templating-pages:
 
 Liens vers des Pages
 ~~~~~~~~~~~~~~~~~~~~
@@ -839,6 +841,8 @@ faisons les liens vers les articles correctement :
 
 .. index::
    single: Templating; Linking to assets
+
+.. _book-templating-assets:
 
 Liens vers des Fichiers
 ~~~~~~~~~~~~~~~~~~~~~~~

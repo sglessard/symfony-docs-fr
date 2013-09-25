@@ -21,6 +21,7 @@ Champs de type Choice
 * :doc:`language</reference/forms/types/language>`
 * :doc:`locale</reference/forms/types/locale>`
 * :doc:`timezone</reference/forms/types/timezone>`
+* :doc:`currency</reference/forms/types/currency>`
 
 Champs de type Date et Time
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -47,10 +48,15 @@ Champs cachés
 ~~~~~~~~~~~~~
 
 * :doc:`hidden</reference/forms/types/hidden>`
-* :doc:`csrf</reference/forms/types/csrf>`
+
+Bouttons
+~~~~~~~~
+
+* :doc:`button</reference/forms/types/button>`
+* :doc:`reset</reference/forms/types/reset>`
+* :doc:`submit</reference/forms/types/submit>`
 
 Champs de base
 ~~~~~~~~~~~~~~
 
-* :doc:`field</reference/forms/types/field>`
 * :doc:`form</reference/forms/types/form>`

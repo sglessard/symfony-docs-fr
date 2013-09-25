@@ -492,7 +492,7 @@ de l'utilisateur.
 Gérer la Locale de l'Utilisateur
 --------------------------------
 
-La locale de l'utilisateur courant est stockée dans la session et est accessible
+La locale de l'utilisateur courant est stockée dans la requète et est accessible
 via l'objet ``request`` :
 
 .. code-block:: php
@@ -745,6 +745,8 @@ Traductions dans les Templates
 La plupart du temps, les traductions surviennent dans les templates. Symfony2 supporte
 nativement les deux types de templates que sont Twig et PHP.
 
+.. _book-translation-tags:
+
 Templates Twig
 ~~~~~~~~~~~~~~
 
@@ -779,6 +781,8 @@ Vous pouvez également spécifier le domaine de messages et passer quelques vari
     {% transchoice count with {'%name%': 'Fabien'} from "app" %}
         {0} There is no apples|{1} There is one apple|]1,Inf] There are %count% apples
     {% endtranschoice %}
+
+.. _book-translation-filters:
 
 Les filtres ``trans`` et ``transchoice`` peuvent être utilisés pour traduire les
 *textes de variable* ainsi que les expressions complexes :
@@ -856,7 +860,7 @@ manuellement la locale à utiliser pour la traduction :
         'Symfony2 is great',
         array(),
         'messages',
-        'fr_FR',
+        'fr_FR'
     );
 
     $this->get('translator')->transChoice(
@@ -864,7 +868,7 @@ manuellement la locale à utiliser pour la traduction :
         10,
         array('%count%' => 10),
         'messages',
-        'fr_FR',
+        'fr_FR'
     );
 
 Traduire le Contenu d'une Base de Données

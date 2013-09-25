@@ -18,6 +18,9 @@ depuis la base de données.
 |             | - `query_builder`_                                                   |
 |             | - `em`_                                                              |
 +-------------+----------------------------------------------------------------------+
+| Options     | - `choices`                                                          |
+| surchargées | - `choice_list`                                                      |
++-------------+----------------------------------------------------------------------+
 | Options     | - `required`_                                                        |
 | héritées    | - `label`_                                                           |
 |             | - `multiple`_                                                        |
@@ -25,7 +28,10 @@ depuis la base de données.
 |             | - `preferred_choices`_                                               |
 |             | - `empty_value`_                                                     |
 |             | - `read_only`_                                                       |
+|             | - `disabled`_                                                        |
 |             | - `error_bubbling`_                                                  |
+|             | - `error_mapping`_                                                   |
+|             | - `mapped`_                                                          |
 +-------------+----------------------------------------------------------------------+
 | Type parent | :doc:`choice</reference/forms/types/choice>`                         |
 +-------------+----------------------------------------------------------------------+
@@ -120,6 +126,22 @@ em
 Si elle est spécifiée, cette option définit le gestionnaire d'entité (entity manager)
 qui sera utilisé pour charger les objets au lieu du gestionnaire par défaut.
 
+Options surchargées
+-------------------
+
+choices
+~~~~~~~
+
+**default**: ``null``
+
+choice_list
+~~~~~~~~~~~
+
+**default**: toutes les entités sélectionnées
+
+Le paramétrage par défaut de ``choices`` sélectionne toutes les entités en utilisant
+l'une des options documentées ci-dessus.
+
 Options héritées
 ----------------
 
@@ -127,13 +149,20 @@ Ces options sont héritées du type :doc:`choice</reference/forms/types/choice>`
 
 .. include:: /reference/forms/types/options/multiple.rst.inc
 
+.. note::
+
+    Si vous utilisez les collections d'entités Doctrine, il vous sera utile
+    de lire la documention pour :doc:`/reference/forms/types/collection`
+    De plus, il y a un exemple complet dans le cookbook.
+    :doc:`/cookbook/form/form_collections`.
+
 .. include:: /reference/forms/types/options/expanded.rst.inc
 
 .. include:: /reference/forms/types/options/preferred_choices.rst.inc
 
 .. include:: /reference/forms/types/options/empty_value.rst.inc
 
-Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
+Ces options sont héritées du type :doc:`form</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -141,4 +170,10 @@ Ces options sont héritées du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
+
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc

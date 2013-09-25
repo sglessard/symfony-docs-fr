@@ -12,7 +12,7 @@ La « valeur » de chaque pays est son code en 2 lettres.
 
 .. note::
 
-   La locale de l'utilisateur est retournée par la méthode `Locale::getDefault()`_
+   La locale de l'utilisateur est retournée par la méthode :phpmethod:`Locale::getDefault()`
 
 Contrairement au type ``choice``, vous n'avez pas besoin de spécifier les options
 ``choices`` ou ``choice_list`` puisque le type retourne automatiquement la liste
@@ -22,19 +22,36 @@ vous devriez plutôt utiliser directement le type ``choice``.
 +-------------+------------------------------------------------------------------------+
 | Rendu comme | peut être différentes balises (voir :ref:`forms-reference-choice-tags`)|
 +-------------+------------------------------------------------------------------------+
+| Options     | - `choices`_                                                           |
+| surchargées |                                                                        |
++-------------+------------------------------------------------------------------------+
 | Options     | - `multiple`_                                                          |
 | héritées    | - `expanded`_                                                          |
 |             | - `preferred_choices`_                                                 |
 |             | - `empty_value`_                                                       |
 |             | - `error_bubbling`_                                                    |
+|             | - `error_mapping`_                                                     |
 |             | - `required`_                                                          |
 |             | - `label`_                                                             |
 |             | - `read_only`_                                                         |
+|             | - `disabled`_                                                          |
+|             | - `mapped`_                                                            |
 +-------------+------------------------------------------------------------------------+
 | Type parent | :doc:`choice</reference/forms/types/choice>`                           |
 +-------------+------------------------------------------------------------------------+
 | Classe      | :class:`Symfony\\Component\\Form\\Extension\\Core\\Type\\CountryType`  |
 +-------------+------------------------------------------------------------------------+
+
+Options surchargées
+-------------------
+
+choices
+~~~~~~~
+
+**default**: ``Symfony\Component\Intl\Intl::getRegionBundle()->getCountryNames()``
+
+La valeur par défaut de l'option ``choices`` est la liste des pays.
+Il utilise la langue par défaut pour déterminer quelle langue utiliser.
 
 Options héritées
 ----------------
@@ -51,7 +68,9 @@ Ces options héritent du type :doc:`choice</reference/forms/types/choice>` :
 
 .. include:: /reference/forms/types/options/error_bubbling.rst.inc
 
-Ces options héritent du type :doc:`field</reference/forms/types/field>` :
+.. include:: /reference/forms/types/options/error_mapping.rst.inc
+
+Ces options héritent du type :doc:`field</reference/forms/types/form>` :
 
 .. include:: /reference/forms/types/options/required.rst.inc
 
@@ -59,4 +78,6 @@ Ces options héritent du type :doc:`field</reference/forms/types/field>` :
 
 .. include:: /reference/forms/types/options/read_only.rst.inc
 
-.. _`Locale::getDefault()`: http://php.net/manual/en/locale.getdefault.php
+.. include:: /reference/forms/types/options/disabled.rst.inc
+
+.. include:: /reference/forms/types/options/mapped.rst.inc
